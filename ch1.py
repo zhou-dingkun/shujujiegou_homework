@@ -15,4 +15,4 @@ n=int(input('输入n:'))
 sum=calc(n)
 print(f'阶乘求和为{sum}')
 #时间复杂度：O（n^2)
-#空间复杂度：S（n^2）
+#空间复杂度：S（1）
