@@ -90,3 +90,75 @@ class LinkedQueue():
             print(current.data, end=' ')
             current = current.next
         print()
+class PriorityNode():
+    def __init__(self,data=None,priority=None,next=None):
+        self.data=data
+        self.priority=priority
+        self.next=next
+class PriorityQueue():
+    def __init__(self):
+        self.front=None
+        self.rear=None
+        self.size=0
+    def clear(self):
+        self.front=None
+        self.rear=None
+        self.size=0
+    def isEmpty(self):
+        return self.size==0
+    def length(self):
+        return self.size
+    def peek(self):
+        if self.isEmpty():
+            raise Exception("Queue is empty")
+        return self.front.data
+    def offer(self,data,priority):
+        new_node=PriorityNode(data,priority)
+        if self.isEmpty():
+            self.front=new_node
+            self.rear=new_node
+        else:
+            current=self.front
+            previous=None
+            while current and current.priority<=priority:
+                previous=current
+                current=current.next
+            if previous is None:
+                new_node.next=self.front
+                self.front=new_node
+            else:
+                previous.next=new_node
+                new_node.next=current
+                if current is None:
+                    self.rear=new_node
+        self.size+=1
+    def poll(self):
+        if self.isEmpty():
+            raise Exception("Queue is empty")
+        item=self.front.data
+        self.front=self.front.next
+        if self.front is None:
+            self.rear=None
+        self.size-=1
+        return item
+    def display(self):
+        if self.isEmpty():
+            print("Queue is empty")
+            return
+        current=self.front
+        while current:
+            print(f"({current.data},{current.priority})",end=' ')
+            current=current.next
+        print()
+class ApplyExample():
+    def processadmin(self,PriorityQueue):#例3.7,课本p48
+        '''处理任务的顺序是根据任务的优先级来决定的，优先级高的任务先处理，优先级低的任务后处理。'''
+        pq=PriorityQueue()
+        pq.offer("任务1",3)
+        pq.offer("任务2",1)
+        pq.offer("任务3",2)
+        pq.offer("任务4",4)
+        print("任务处理顺序为：")
+        while not pq.isEmpty():
+            task=pq.poll()
+            print(task,end=' ')
