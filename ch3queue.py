@@ -162,3 +162,17 @@ class ApplyExample():
         while not pq.isEmpty():
             task=pq.poll()
             print(task,end=' ')
+    def checktype(self):
+        lq=LinkedQueue()
+        lq.offer('1',1)
+        lq.offer('2',2)
+        lq.offer('3',3)
+        lq.offer('4',4)
+        now=lq.peek()
+        for i in range(lq.length()):
+            print("当前队列的第",i+1,"个元素为：",now)
+            print("类型是：",type(now))
+            now=now.next
+if __name__=="__main__":
+    example=ApplyExample()
+    example.checktype()
